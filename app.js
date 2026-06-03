@@ -150,41 +150,98 @@ document.getElementById('calendar-btn').addEventListener('click', () => {
 });
 
 // ----------------------------------------------------
-// RSVP Action logic
+// RSVP Action logic with Web3Forms
 // ----------------------------------------------------
 const yesBtn = document.getElementById('rsvp-yes');
 const noBtn = document.getElementById('rsvp-no');
+const guestNameInput = document.getElementById('guest-name');
 const feedbackContainer = document.getElementById('rsvp-feedback');
 const feedbackMessage = feedbackContainer.querySelector('.feedback-message');
+const WEB3FORMS_ACCESS_KEY = "94efdaf5-d649-4c81-a5e6-12082b9fb85d";
 
 // Check local storage for pre-existing RSVPs
 const savedRsvp = localStorage.getItem('elena-rsvp');
+const savedName = localStorage.getItem('elena-guest-name');
 if (savedRsvp) {
+    if (savedName) {
+        guestNameInput.value = savedName;
+        guestNameInput.disabled = true;
+    }
     showRsvpFeedback(savedRsvp === 'yes');
 }
 
-yesBtn.addEventListener('click', () => {
-    localStorage.setItem('elena-rsvp', 'yes');
-    showRsvpFeedback(true);
-    startConfetti();
-    sendEmailNotification(true);
+// Remove error class on focus/type
+guestNameInput.addEventListener('input', () => {
+    guestNameInput.classList.remove('error');
 });
 
-noBtn.addEventListener('click', () => {
-    localStorage.setItem('elena-rsvp', 'no');
-    showRsvpFeedback(false);
-    sendEmailNotification(false);
-});
+yesBtn.addEventListener('click', () => handleRsvpSubmission(true));
+noBtn.addEventListener('click', () => handleRsvpSubmission(false));
 
-function sendEmailNotification(isAttending) {
-    const email = "juanjllm@duck.com";
-    const subject = encodeURIComponent(isAttending ? "RSVP: Elena's 1st Birthday - Count Me In! 🎉" : "RSVP: Elena's 1st Birthday - Can't Make It 😔");
-    const body = encodeURIComponent(isAttending 
-        ? "Hi Juan,\n\nI will be attending Elena's 1st Birthday Party on October 11th!\n\nGuest Name(s): [Please enter your name(s) here]\nNumber of guests: [Please enter total count]" 
-        : "Hi Juan,\n\nI won't be able to make it to Elena's 1st Birthday Party, but wishing her the happiest birthday!\n\nWarmly,\n[Please enter your name]");
+async function handleRsvpSubmission(isAttending) {
+    const guestName = guestNameInput.value.trim();
     
-    // Open the user's default email client
-    window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+    if (!guestName) {
+        guestNameInput.classList.add('error');
+        guestNameInput.focus();
+        return;
+    }
+
+    // Set UI to loading state
+    setLoadingState(true);
+    feedbackContainer.className = 'rsvp-feedback success';
+    feedbackMessage.innerHTML = 'Sending RSVP... ⏳';
+    feedbackContainer.classList.remove('hidden');
+
+    try {
+        const response = await fetch("https://api.web3forms.com/submit", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({
+                access_key: WEB3FORMS_ACCESS_KEY,
+                subject: `RSVP: Elena's 1st Birthday - ${isAttending ? 'Count Me In! 🎉' : "Can't Make It 😔"}`,
+                from_name: "Elena Save the Date",
+                guest_name: guestName,
+                attending: isAttending ? "Yes" : "No"
+            })
+        });
+
+        const result = await response.json();
+        
+        if (response.ok && result.success) {
+            localStorage.setItem('elena-rsvp', isAttending ? 'yes' : 'no');
+            localStorage.setItem('elena-guest-name', guestName);
+            guestNameInput.disabled = true;
+            
+            showRsvpFeedback(isAttending);
+            if (isAttending) {
+                startConfetti();
+            }
+        } else {
+            throw new Error(result.message || "Failed to submit RSVP");
+        }
+    } catch (error) {
+        console.error("RSVP Submission Error:", error);
+        feedbackContainer.className = 'rsvp-feedback failure';
+        feedbackMessage.innerHTML = 'Oops! Something went wrong. Please try again. ⚠️';
+        setLoadingState(false);
+    }
+}
+
+function setLoadingState(isLoading) {
+    yesBtn.disabled = isLoading;
+    noBtn.disabled = isLoading;
+    guestNameInput.disabled = isLoading;
+    if (isLoading) {
+        yesBtn.style.opacity = '0.5';
+        noBtn.style.opacity = '0.5';
+    } else {
+        yesBtn.style.opacity = '1';
+        noBtn.style.opacity = '1';
+    }
 }
 
 function showRsvpFeedback(isYes) {
