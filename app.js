@@ -7,7 +7,8 @@ function updateCountdown() {
     const difference = TARGET_DATE - now;
 
     if (difference < 0) {
-        document.getElementById('countdown').innerHTML = `<div class="time-block" style="grid-column: span 4; font-weight: bold; font-size: 1.2rem; color: var(--burgundy);">The Feast Has Begun! ⚡</div>`;
+        const text = currentLang === 'en' ? "The Feast Has Begun! ⚡" : "¡El Banquete ha comenzado! ⚡";
+        document.getElementById('countdown').innerHTML = `<div class="time-block" style="grid-column: span 4; font-weight: bold; font-size: 1.2rem; color: var(--burgundy);">${text}</div>`;
         return;
     }
 
@@ -49,7 +50,6 @@ class ConfettiParticle {
         this.speedX = Math.random() * 8 - 4;
         this.speedY = Math.random() * -12 - 4; // upward spark
         this.gravity = 0.25;
-        // Hogwarts themed colors: Burgundy, Gold, Parchment, Dark Plum
         this.color = ['#7D0C0C', '#D29A15', '#FAF0D7', '#2C1E11', '#ff9900'][Math.floor(Math.random() * 5)];
         this.rotation = Math.random() * 360;
         this.rotationSpeed = Math.random() * 8 - 4;
@@ -74,7 +74,6 @@ class ConfettiParticle {
         ctx.rotate((this.rotation * Math.PI) / 180);
         ctx.globalAlpha = this.opacity;
         ctx.fillStyle = this.color;
-        // Drawing tiny sparkles / stars
         ctx.beginPath();
         for (let i = 0; i < 5; i++) {
             ctx.lineTo(Math.cos((18 + i * 72) * Math.PI / 180) * this.size, Math.sin((18 + i * 72) * Math.PI / 180) * this.size);
@@ -117,15 +116,109 @@ function animateConfetti() {
 }
 
 // ----------------------------------------------------
+// Translation Engine
+// ----------------------------------------------------
+const TRANSLATIONS = {
+    en: {
+        owl_post: "O.W.L. POST",
+        title: "Elena is turning <span class=\"magic-highlight\">ONE</span>",
+        subtitle: "We are pleased to inform you that you have been invited to celebrate a magical first year of life. Dust off your spellbooks and prepare your wands!",
+        timer_heading: "Hogwarts Express Departs In:",
+        days: "Days",
+        hours: "Hours",
+        minutes: "Mins",
+        seconds: "Secs",
+        feast_title: "The Feast",
+        feast_date: "Sunday, October 11, 2026",
+        feast_time: "At 2 O'clock in the afternoon",
+        hall_title: "The Great Hall",
+        hall_loc: "Waukegan, Illinois",
+        hall_details: "Platform 9 ¾ (Venue details to follow)",
+        accio_calendar: "Accio Calendar",
+        marauders_map: "Marauder's Map",
+        rsvp_title: "Attending the Feast?",
+        rsvp_subtitle: "Reply by owl post! (Enter your name and confirm your attendance below.)",
+        rsvp_placeholder: "Wizard / Witch Name(s)",
+        rsvp_yes: "Attending!",
+        rsvp_no: "Send Howler",
+        footer_text: "Mischief Managed &hearts; Solemnly Sworn",
+        feedback_yes: "Alohomora! Your response is received. We are so excited to celebrate with you! 🎈⚡",
+        feedback_no: "Alas! A Howler has been sent. We will miss you at the Great Hall feast! 🍰",
+        sending_owl: "Sending Owl Post... 🦉⏳",
+        owl_lost: "Oops! Your Owl got lost. Please cast again. 🦉💥"
+    },
+    es: {
+        owl_post: "CORREO LECHUZA",
+        title: "Elena cumple <span class=\"magic-highlight\">UN AÑO</span>",
+        subtitle: "Nos complace informarle que ha sido invitado a celebrar un año mágico de vida. ¡Despolve sus libros de hechizos y prepare sus varitas!",
+        timer_heading: "El Expreso de Hogwarts parte en:",
+        days: "Días",
+        hours: "Horas",
+        minutes: "Mins",
+        seconds: "Segs",
+        feast_title: "El Banquete",
+        feast_date: "Domingo, 11 de Octubre de 2026",
+        feast_time: "A las 2 en punto de la tarde",
+        hall_title: "El Gran Comedor",
+        hall_loc: "Waukegan, Illinois",
+        hall_details: "Plataforma 9 ¾ (Detalles del lugar a seguir)",
+        accio_calendar: "Accio Calendario",
+        marauders_map: "Mapa del Merodeador",
+        rsvp_title: "¿Asistirá al Banquete?",
+        rsvp_subtitle: "¡Responda por correo de lechuza! (Ingrese su nombre y confirme su asistencia a continuación.)",
+        rsvp_placeholder: "Nombre(s) de Mago / Bruja",
+        rsvp_yes: "¡Asistiré!",
+        rsvp_no: "Enviar Vociferador",
+        footer_text: "Travesura Realizada &hearts; Juramento Solemne",
+        feedback_yes: "¡Alohomora! Tu respuesta ha sido recibida. ¡Estamos muy emocionados de celebrar contigo! 🎈⚡",
+        feedback_no: "¡Alas! Se ha enviado un Vociferador. ¡Te extrañaremos en el banquete del Gran Comedor! 🍰",
+        sending_owl: "Enviando Correo Lechuza... 🦉⏳",
+        owl_lost: "¡Oops! Tu lechuza se perdió. Por favor lanza de nuevo. 🦉💥"
+    }
+};
+
+let currentLang = 'en';
+
+function setLanguage(lang) {
+    currentLang = lang;
+    document.querySelectorAll("[data-translate]").forEach(elem => {
+        const key = elem.getAttribute("data-translate");
+        if (TRANSLATIONS[lang] && TRANSLATIONS[lang][key]) {
+            elem.innerHTML = TRANSLATIONS[lang][key];
+        }
+    });
+
+    const nameInput = document.getElementById('guest-name');
+    if (nameInput) {
+        nameInput.placeholder = TRANSLATIONS[lang]['rsvp_placeholder'];
+    }
+
+    document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+    document.getElementById('lang-es').classList.toggle('active', lang === 'es');
+
+    updateCountdown();
+
+    const savedRsvp = localStorage.getItem('elena-rsvp');
+    if (savedRsvp) {
+        showRsvpFeedback(savedRsvp === 'yes');
+    }
+}
+
+document.getElementById('lang-en').addEventListener('click', () => setLanguage('en'));
+document.getElementById('lang-es').addEventListener('click', () => setLanguage('es'));
+
+// ----------------------------------------------------
 // Add to Calendar Generator (.ics File format)
 // ----------------------------------------------------
 document.getElementById('calendar-btn').addEventListener('click', () => {
     const event = {
-        title: "Elena's Magical 1st Birthday Feast! ⚡",
-        description: "We are pleased to inform you that you have been invited to celebrate a magical first year of life. Dust off your spellbooks and prepare your wands!",
-        location: "Waukegan, IL (Platform 9 3/4)",
-        startDate: "20261011T140000", // Oct 11, 2026 at 2:00 PM
-        endDate: "20261011T170000"     // Oct 11, 2026 at 5:00 PM
+        title: currentLang === 'en' ? "Elena's Magical 1st Birthday Feast! ⚡" : "¡El Banquete Mágico de Elena! ⚡",
+        description: currentLang === 'en' 
+            ? "We are pleased to inform you that you have been invited to celebrate a magical first year of life. Dust off your spellbooks and prepare your wands!"
+            : "Nos complace informarle que ha sido invitado a celebrar un año mágico de vida. ¡Despolve sus libros de hechizos y prepare sus varitas!",
+        location: currentLang === 'en' ? "Waukegan, IL (Platform 9 3/4)" : "Waukegan, IL (Plataforma 9 3/4)",
+        startDate: "20261011T140000",
+        endDate: "20261011T170000"
     };
 
     const icsContent = [
@@ -147,12 +240,11 @@ document.getElementById('calendar-btn').addEventListener('click', () => {
     const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
     const link = document.createElement('a');
     link.href = window.URL.createObjectURL(blob);
-    link.setAttribute('download', 'Elenas_Magical_First_Birthday.ics');
+    link.setAttribute('download', currentLang === 'en' ? 'Elenas_Magical_First_Birthday.ics' : 'Banquete_Magico_Elena.ics');
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
 
-    // Confetti burst for saving the date
     startConfetti();
 });
 
@@ -166,7 +258,6 @@ const feedbackContainer = document.getElementById('rsvp-feedback');
 const feedbackMessage = feedbackContainer.querySelector('.feedback-message');
 const WEB3FORMS_ACCESS_KEY = "94efdaf5-d649-4c81-a5e6-12082b9fb85d";
 
-// Check local storage for pre-existing RSVPs
 const savedRsvp = localStorage.getItem('elena-rsvp');
 const savedName = localStorage.getItem('elena-guest-name');
 if (savedRsvp) {
@@ -177,7 +268,6 @@ if (savedRsvp) {
     showRsvpFeedback(savedRsvp === 'yes');
 }
 
-// Remove error class on focus/type
 guestNameInput.addEventListener('input', () => {
     guestNameInput.classList.remove('error');
 });
@@ -194,10 +284,9 @@ async function handleRsvpSubmission(isAttending) {
         return;
     }
 
-    // Set UI to loading state
     setLoadingState(true);
     feedbackContainer.className = 'rsvp-feedback success';
-    feedbackMessage.innerHTML = 'Sending Owl Post... 🦉⏳';
+    feedbackMessage.innerHTML = TRANSLATIONS[currentLang]['sending_owl'];
     feedbackContainer.classList.remove('hidden');
 
     try {
@@ -233,7 +322,7 @@ async function handleRsvpSubmission(isAttending) {
     } catch (error) {
         console.error("RSVP Submission Error:", error);
         feedbackContainer.className = 'rsvp-feedback failure';
-        feedbackMessage.innerHTML = 'Oops! Your Owl got lost. Please cast again. 🦉💥';
+        feedbackMessage.innerHTML = TRANSLATIONS[currentLang]['owl_lost'];
         setLoadingState(false);
     }
 }
@@ -252,15 +341,15 @@ function setLoadingState(isLoading) {
 }
 
 function showRsvpFeedback(isYes) {
-    feedbackContainer.className = 'rsvp-feedback'; // reset classes
+    feedbackContainer.className = 'rsvp-feedback';
     if (isYes) {
         feedbackContainer.classList.add('success');
-        feedbackMessage.innerHTML = 'Alohomora! Your response is received. We are so excited to celebrate with you! 🎈⚡';
+        feedbackMessage.innerHTML = TRANSLATIONS[currentLang]['feedback_yes'];
         yesBtn.classList.add('hidden');
         noBtn.classList.remove('hidden');
     } else {
         feedbackContainer.classList.add('failure');
-        feedbackMessage.innerHTML = "Alas! A Howler has been sent. We will miss you at the Great Hall feast! 🍰";
+        feedbackMessage.innerHTML = TRANSLATIONS[currentLang]['feedback_no'];
         noBtn.classList.add('hidden');
         yesBtn.classList.remove('hidden');
     }
