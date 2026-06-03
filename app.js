@@ -157,7 +157,7 @@ const TRANSLATIONS = {
         minutes: "Mins",
         seconds: "Segs",
         feast_title: "El Banquete",
-        feast_date: "Domingo, 11 de Octubre de 2026",
+        feast_date: "Sabado, 10 de Octubre de 2026",
         feast_time: "A las 2 en punto de la tarde",
         hall_title: "El Gran Comedor",
         hall_loc: "Waukegan, Illinois",
