@@ -136,6 +136,40 @@ body {
     position: relative;
 }
 
+/* Language Toggle styling */
+.lang-toggle {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--ink-muted);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    z-index: 15;
+}
+
+.lang-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--ink-muted);
+    transition: var(--transition);
+}
+
+.lang-btn:hover, .lang-btn.active {
+    color: var(--burgundy);
+    text-shadow: 0 0 1px rgba(125, 12, 12, 0.2);
+}
+
+.lang-separator {
+    color: rgba(92, 69, 51, 0.3);
+}
+
 /* Wax Seal */
 .wax-seal {
     width: 70px;
