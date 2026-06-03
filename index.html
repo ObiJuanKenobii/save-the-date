@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elena is turning ONE! - Save the Date</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Background whimsical elements -->
+    <div class="blob-bg blob-1"></div>
+    <div class="blob-bg blob-2"></div>
+    <div class="blob-bg blob-3"></div>
+
+    <div class="container">
+        <!-- Main Card -->
+        <main class="card">
+            <!-- Decorative Banner -->
+            <div class="celebration-banner">
+                <span class="badge">Save the Date</span>
+            </div>
+
+            <!-- Hero Section -->
+            <section class="hero">
+                <h1 class="title">Elena is turning <span class="one-highlight">ONE!</span></h1>
+                <p class="subtitle">Join us for a fun, whimsical adventure to celebrate her first birthday!</p>
+            </section>
+
+            <!-- Countdown Timer -->
+            <section class="countdown-section">
+                <div class="countdown-container" id="countdown">
+                    <div class="time-block">
+                        <span class="time-val" id="days">00</span>
+                        <span class="time-label">Days</span>
+                    </div>
+                    <div class="time-block">
+                        <span class="time-val" id="hours">00</span>
+                        <span class="time-label">Hours</span>
+                    </div>
+                    <div class="time-block">
+                        <span class="time-val" id="minutes">00</span>
+                        <span class="time-label">Mins</span>
+                    </div>
+                    <div class="time-block">
+                        <span class="time-val" id="seconds">00</span>
+                        <span class="time-label">Secs</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Event Details -->
+            <section class="details-section">
+                <div class="detail-item">
+                    <div class="icon-wrapper">
+                        <i class="fa-regular fa-calendar-check"></i>
+                    </div>
+                    <div class="detail-text">
+                        <h3>When</h3>
+                        <p class="highlight-text">Sunday, October 11, 2026</p>
+                        <p>Save it to your calendar below!</p>
+                    </div>
+                </div>
+
+                <div class="detail-item">
+                    <div class="icon-wrapper">
+                        <i class="fa-solid fa-map-pin"></i>
+                    </div>
+                    <div class="detail-text">
+                        <h3>Where</h3>
+                        <p class="highlight-text">Waukegan, Illinois</p>
+                        <p>Venue details coming soon.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Actions / Add to Calendar -->
+            <section class="actions-section">
+                <button class="btn btn-secondary" id="calendar-btn">
+                    <i class="fa-regular fa-calendar-plus"></i> Add to Calendar
+                </button>
+                <a href="https://maps.google.com/?q=Waukegan,+IL" target="_blank" class="btn btn-secondary">
+                    <i class="fa-solid fa-location-dot"></i> View on Map
+                </a>
+            </section>
+
+            <!-- RSVP Interest Section -->
+            <section class="rsvp-section">
+                <h2>Are you able to join the fun?</h2>
+                <p>Let us know if you think you can make it! We'll send formal invitations later.</p>
+                <div class="rsvp-buttons">
+                    <button class="btn btn-rsvp btn-yes" id="rsvp-yes">
+                        <i class="fa-regular fa-face-smile-beam animate-bounce"></i> Count Me In!
+                    </button>
+                    <button class="btn btn-rsvp btn-no" id="rsvp-no">
+                        <i class="fa-regular fa-face-frown"></i> Can't Make It
+                    </button>
+                </div>
+                <div class="rsvp-feedback hidden" id="rsvp-feedback">
+                    <p class="feedback-message"></p>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Made with &hearts; for Elena. We can't wait to celebrate with you!</p>
+        </footer>
+    </div>
+
+    <!-- Canvas for confetti effect -->
+    <canvas id="confetti-canvas"></canvas>
+
+    <script src="app.js"></script>
+</body>
+</html>
