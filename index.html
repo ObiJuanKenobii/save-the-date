@@ -3,37 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elena is turning ONE! - Save the Date</title>
-    <!-- Google Fonts -->
+    <title>Elena's First Birthday - Save the Date</title>
+    <!-- Google Fonts: Cinzel Decorative for wizard headers, Montserrat for text -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <!-- FontAwesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- Background whimsical elements -->
-    <div class="blob-bg blob-1"></div>
-    <div class="blob-bg blob-2"></div>
-    <div class="blob-bg blob-3"></div>
+    <!-- Starry background and floating candles -->
+    <div class="stars"></div>
+    <div class="twinkling"></div>
+    <div class="floating-candles-container">
+        <div class="candle c1"></div>
+        <div class="candle c2"></div>
+        <div class="candle c3"></div>
+        <div class="candle c4"></div>
+        <div class="candle c5"></div>
+        <div class="candle c6"></div>
+    </div>
 
     <div class="container">
-        <!-- Main Card -->
-        <main class="card">
-            <!-- Decorative Banner -->
-            <div class="celebration-banner">
-                <span class="badge">Save the Date</span>
+        <!-- Parchment Card -->
+        <main class="card parchment">
+            <!-- Hogwarts style crest placeholder / wax seal -->
+            <div class="wax-seal">
+                <span class="wax-initial">E</span>
             </div>
 
             <!-- Hero Section -->
             <section class="hero">
-                <h1 class="title">Elena is turning <span class="one-highlight">ONE!</span></h1>
-                <p class="subtitle">Join us for a fun, whimsical adventure to celebrate her first birthday!</p>
+                <p class="owl-post">O.W.L. POST</p>
+                <h1 class="title">Elena is turning <span class="magic-highlight">ONE</span></h1>
+                <p class="subtitle letter-text">
+                    We are pleased to inform you that you have been invited to celebrate a magical first year of life. Dust off your spellbooks and prepare your wands!
+                </p>
             </section>
 
             <!-- Countdown Timer -->
             <section class="countdown-section">
+                <h4 class="timer-heading">Hogwarts Express Departs In:</h4>
                 <div class="countdown-container" id="countdown">
                     <div class="time-block">
                         <span class="time-val" id="days">00</span>
@@ -58,23 +69,23 @@
             <section class="details-section">
                 <div class="detail-item">
                     <div class="icon-wrapper">
-                        <i class="fa-regular fa-calendar-check"></i>
+                        <i class="fa-solid fa-feather-pointed"></i>
                     </div>
                     <div class="detail-text">
-                        <h3>When</h3>
+                        <h3>The Feast</h3>
                         <p class="highlight-text">Sunday, October 11, 2026</p>
-                        <p>Save it to your calendar below!</p>
+                        <p>At 2 O'clock in the afternoon</p>
                     </div>
                 </div>
 
                 <div class="detail-item">
                     <div class="icon-wrapper">
-                        <i class="fa-solid fa-map-pin"></i>
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
                     </div>
                     <div class="detail-text">
-                        <h3>Where</h3>
+                        <h3>The Great Hall</h3>
                         <p class="highlight-text">Waukegan, Illinois</p>
-                        <p>Venue details coming soon.</p>
+                        <p>Platform 9 ¾ (Venue details to follow)</p>
                     </div>
                 </div>
             </section>
@@ -82,26 +93,26 @@
             <!-- Actions / Add to Calendar -->
             <section class="actions-section">
                 <button class="btn btn-secondary" id="calendar-btn">
-                    <i class="fa-regular fa-calendar-plus"></i> Add to Calendar
+                    <i class="fa-regular fa-clock"></i> Accio Calendar
                 </button>
                 <a href="https://maps.google.com/?q=Waukegan,+IL" target="_blank" class="btn btn-secondary">
-                    <i class="fa-solid fa-location-dot"></i> View on Map
+                    <i class="fa-solid fa-map"></i> Marauder's Map
                 </a>
             </section>
 
             <!-- RSVP Interest Section -->
             <section class="rsvp-section">
-                <h2>Are you able to join the fun?</h2>
-                <p>Let us know if you think you can make it! We'll send formal invitations later.</p>
+                <h2>Attending the Feast?</h2>
+                <p>Reply by owl post! (Enter your name and confirm your attendance below.)</p>
                 <div class="rsvp-input-group">
-                    <input type="text" id="guest-name" class="form-input" placeholder="Your Name(s)" required>
+                    <input type="text" id="guest-name" class="form-input" placeholder="Wizard / Witch Name(s)" required>
                 </div>
                 <div class="rsvp-buttons">
                     <button class="btn btn-rsvp btn-yes" id="rsvp-yes">
-                        <i class="fa-regular fa-face-smile-beam animate-bounce"></i> Count Me In!
+                        <i class="fa-solid fa-bolt animate-sparkle"></i> Attending!
                     </button>
                     <button class="btn btn-rsvp btn-no" id="rsvp-no">
-                        <i class="fa-regular fa-face-frown"></i> Can't Make It
+                        <i class="fa-solid fa-envelope-open-text"></i> Send Howler (Can't Attend)
                     </button>
                 </div>
                 <div class="rsvp-feedback hidden" id="rsvp-feedback">
@@ -112,7 +123,7 @@
 
         <!-- Footer -->
         <footer class="footer">
-            <p>Made with &hearts; for Elena. We can't wait to celebrate with you!</p>
+            <p>Mischief Managed &hearts; Solemnly Sworn</p>
         </footer>
     </div>
 
