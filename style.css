@@ -362,6 +362,64 @@ body {
     transform: translateY(-2px);
 }
 
+/* Gringotts / 529 Section styles */
+.gringotts-section {
+    background: rgba(210, 154, 21, 0.05);
+    border-radius: 16px;
+    padding: 25px 20px;
+    border: 1.5px dashed rgba(210, 154, 21, 0.3);
+    margin-bottom: 25px;
+}
+
+.gringotts-section h2 {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.3rem;
+    color: var(--burgundy);
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.gringotts-text {
+    font-size: 0.9rem;
+    color: var(--ink-muted);
+    font-weight: 600;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.gringotts-info {
+    font-size: 0.9rem;
+    color: var(--ink-dark);
+    font-weight: 700;
+}
+
+.ugift-link {
+    color: var(--burgundy);
+    text-decoration: underline;
+    font-weight: 700;
+    transition: var(--transition);
+}
+
+.ugift-link:hover {
+    color: var(--gold);
+}
+
+.vault-code {
+    display: inline-block;
+    margin-top: 8px;
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.6rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    color: var(--burgundy);
+    background-color: rgba(210, 154, 21, 0.15);
+    border: 2px solid var(--gold);
+    padding: 6px 20px;
+    border-radius: 8px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+    text-shadow: 1px 1px 0px #fff;
+}
+
 /* RSVP Section styles */
 .rsvp-section {
     background: rgba(92, 69, 51, 0.05);
