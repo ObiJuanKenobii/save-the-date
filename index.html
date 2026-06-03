@@ -28,6 +28,13 @@
     <div class="container">
         <!-- Parchment Card -->
         <main class="card parchment">
+            <!-- Language Toggle -->
+            <div class="lang-toggle">
+                <button id="lang-en" class="lang-btn active">EN</button>
+                <span class="lang-separator">|</span>
+                <button id="lang-es" class="lang-btn">ES</button>
+            </div>
+
             <!-- Hogwarts style crest placeholder / wax seal -->
             <div class="wax-seal">
                 <span class="wax-initial">E</span>
@@ -35,32 +42,32 @@
 
             <!-- Hero Section -->
             <section class="hero">
-                <p class="owl-post">O.W.L. POST</p>
-                <h1 class="title">Elena is turning <span class="magic-highlight">ONE</span></h1>
-                <p class="subtitle letter-text">
+                <p class="owl-post" data-translate="owl_post">O.W.L. POST</p>
+                <h1 class="title" data-translate="title">Elena is turning <span class="magic-highlight">ONE</span></h1>
+                <p class="subtitle letter-text" data-translate="subtitle">
                     We are pleased to inform you that you have been invited to celebrate a magical first year of life. Dust off your spellbooks and prepare your wands!
                 </p>
             </section>
 
             <!-- Countdown Timer -->
             <section class="countdown-section">
-                <h4 class="timer-heading">Hogwarts Express Departs In:</h4>
+                <h4 class="timer-heading" data-translate="timer_heading">Hogwarts Express Departs In:</h4>
                 <div class="countdown-container" id="countdown">
                     <div class="time-block">
                         <span class="time-val" id="days">00</span>
-                        <span class="time-label">Days</span>
+                        <span class="time-label" data-translate="days">Days</span>
                     </div>
                     <div class="time-block">
                         <span class="time-val" id="hours">00</span>
-                        <span class="time-label">Hours</span>
+                        <span class="time-label" data-translate="hours">Hours</span>
                     </div>
                     <div class="time-block">
                         <span class="time-val" id="minutes">00</span>
-                        <span class="time-label">Mins</span>
+                        <span class="time-label" data-translate="minutes">Mins</span>
                     </div>
                     <div class="time-block">
                         <span class="time-val" id="seconds">00</span>
-                        <span class="time-label">Secs</span>
+                        <span class="time-label" data-translate="seconds">Secs</span>
                     </div>
                 </div>
             </section>
@@ -72,9 +79,9 @@
                         <i class="fa-solid fa-feather-pointed"></i>
                     </div>
                     <div class="detail-text">
-                        <h3>The Feast</h3>
-                        <p class="highlight-text">Sunday, October 11, 2026</p>
-                        <p>At 2 O'clock in the afternoon</p>
+                        <h3 data-translate="feast_title">The Feast</h3>
+                        <p class="highlight-text" data-translate="feast_date">Sunday, October 11, 2026</p>
+                        <p data-translate="feast_time">At 2 O'clock in the afternoon</p>
                     </div>
                 </div>
 
@@ -83,9 +90,9 @@
                         <i class="fa-solid fa-wand-magic-sparkles"></i>
                     </div>
                     <div class="detail-text">
-                        <h3>The Great Hall</h3>
-                        <p class="highlight-text">Waukegan, Illinois</p>
-                        <p>Platform 9 ¾ (Venue details to follow)</p>
+                        <h3 data-translate="hall_title">The Great Hall</h3>
+                        <p class="highlight-text" data-translate="hall_loc">Waukegan, Illinois</p>
+                        <p data-translate="hall_details">Platform 9 ¾ (Venue details to follow)</p>
                     </div>
                 </div>
             </section>
@@ -93,26 +100,26 @@
             <!-- Actions / Add to Calendar -->
             <section class="actions-section">
                 <button class="btn btn-secondary" id="calendar-btn">
-                    <i class="fa-regular fa-clock"></i> Accio Calendar
+                    <i class="fa-regular fa-clock"></i> <span data-translate="accio_calendar">Accio Calendar</span>
                 </button>
                 <a href="https://maps.google.com/?q=Waukegan,+IL" target="_blank" class="btn btn-secondary">
-                    <i class="fa-solid fa-map"></i> Marauder's Map
+                    <i class="fa-solid fa-map"></i> <span data-translate="marauders_map">Marauder's Map</span>
                 </a>
             </section>
 
             <!-- RSVP Interest Section -->
             <section class="rsvp-section">
-                <h2>Attending the Feast?</h2>
-                <p>Reply by owl post! (Enter your name and confirm your attendance below.)</p>
+                <h2 data-translate="rsvp_title">Attending the Feast?</h2>
+                <p data-translate="rsvp_subtitle">Reply by owl post! (Enter your name and confirm your attendance below.)</p>
                 <div class="rsvp-input-group">
                     <input type="text" id="guest-name" class="form-input" placeholder="Wizard / Witch Name(s)" required>
                 </div>
                 <div class="rsvp-buttons">
                     <button class="btn btn-rsvp btn-yes" id="rsvp-yes">
-                        <i class="fa-solid fa-bolt animate-sparkle"></i> Attending!
+                        <i class="fa-solid fa-bolt animate-sparkle"></i> <span data-translate="rsvp_yes">Attending!</span>
                     </button>
                     <button class="btn btn-rsvp btn-no" id="rsvp-no">
-                        <i class="fa-solid fa-envelope-open-text"></i> Send Howler (Can't Attend)
+                        <i class="fa-solid fa-envelope-open-text"></i> <span data-translate="rsvp_no">Send Howler</span>
                     </button>
                 </div>
                 <div class="rsvp-feedback hidden" id="rsvp-feedback">
@@ -123,7 +130,7 @@
 
         <!-- Footer -->
         <footer class="footer">
-            <p>Mischief Managed &hearts; Solemnly Sworn</p>
+            <p data-translate="footer_text">Mischief Managed &hearts; Solemnly Sworn</p>
         </footer>
     </div>
 
