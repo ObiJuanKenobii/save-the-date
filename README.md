@@ -1,4 +1,4 @@
-# Save the Date Website template (elenallagun)
+# Save the Date Website template (elena)
 
 A clean, modern, and whimsical single-page static website built to share event details. It features a responsive layout, a live countdown timer, interactive RSVP with a canvas-based confetti explosion, and dynamic `.ics` calendar generation.
 
